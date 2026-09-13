@@ -23,7 +23,6 @@
   html,body{background:linear-gradient(180deg,#0a0e1a 0%,#0d1424 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto',sans-serif;min-height:100vh;}
   body{padding:16px;display:flex;flex-direction:column;align-items:center;}
 
-  /* HEADER */
   .header{width:100%;max-width:480px;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:rgba(22,32,58,.6);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:14px;margin-bottom:18px;}
   .logo{font-size:18px;letter-spacing:.15em;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;}
   .logo small{display:block;font-size:8px;letter-spacing:.3em;color:var(--text3);font-weight:500;margin-top:2px;}
@@ -33,7 +32,6 @@
   .screen{width:100%;max-width:480px;display:none;}
   .screen.active{display:block;}
 
-  /* LOGIN */
   .login-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 24px;margin-top:40px;}
   .login-title{text-align:center;font-size:30px;letter-spacing:.15em;font-weight:800;color:#fff;margin-bottom:6px;}
   .login-sub{text-align:center;font-size:10px;letter-spacing:.35em;color:var(--text3);margin-bottom:36px;}
@@ -43,7 +41,6 @@
   .btn-main{width:100%;padding:18px;border:none;border-radius:12px;font-family:inherit;font-weight:800;letter-spacing:.2em;font-size:13px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));cursor:pointer;box-shadow:0 8px 24px rgba(109,94,255,.35);transition:.2s;}
   .btn-main:active{transform:scale(.98);}
 
-  /* DEVICE LIST */
   .page-title{font-size:22px;font-weight:800;letter-spacing:.1em;color:#fff;margin-bottom:4px;}
   .page-sub{font-size:11px;color:var(--text3);letter-spacing:.2em;margin-bottom:20px;}
   .device-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:.15s;}
@@ -55,7 +52,6 @@
   .device-card .status.online{background:rgba(0,230,118,.15);color:var(--success);box-shadow:0 0 12px rgba(0,230,118,.2);}
   .device-card .status.offline{background:rgba(138,151,184,.1);color:var(--text3);}
 
-  /* DETAIL */
   .back-btn{background:var(--card);border:1px solid var(--border);color:var(--text2);font-size:11px;letter-spacing:.15em;padding:10px 16px;border-radius:10px;margin-bottom:16px;cursor:pointer;}
   .back-btn:active{background:var(--card-hover);}
   .detail-title{font-size:22px;font-weight:800;letter-spacing:.1em;color:#fff;margin-bottom:4px;}
@@ -63,7 +59,6 @@
   .section-label{font-size:11px;font-weight:700;letter-spacing:.25em;color:var(--text3);margin:24px 0 12px;display:flex;align-items:center;gap:8px;}
   .section-label::before{content:'';width:3px;height:14px;background:linear-gradient(180deg,var(--accent),var(--accent2));border-radius:2px;}
 
-  /* GRID */
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;}
   .ctrl{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;cursor:pointer;transition:.15s;gap:8px;}
   .ctrl:active{background:var(--card-hover);border-color:var(--accent);transform:scale(.97);}
@@ -73,28 +68,23 @@
   .ctrl.danger .icon{filter:drop-shadow(0 0 8px rgba(255,51,85,.5));}
   .ctrl.danger:active{background:rgba(255,51,85,.08);}
 
-  /* FILES BOX */
   .files-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;min-height:100px;margin-bottom:8px;}
   .files-empty{color:var(--text3);text-align:center;padding:30px 0;font-size:11px;letter-spacing:.2em;}
 
-  /* OUTPUT */
   .output{background:#0a0e1a;border:1px solid var(--border);border-radius:14px;padding:18px;font-size:14px;color:#a7c7ff;font-family:'Menlo','Courier New',monospace;line-height:1.7;max-height:55vh;min-height:180px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;box-shadow:inset 0 0 30px rgba(109,94,255,.05);}
   .output .empty{color:var(--text3);text-align:center;padding:50px 0;letter-spacing:.2em;font-size:12px;}
 
-  /* NAV */
   .bottom-nav{width:100%;max-width:480px;position:fixed;bottom:0;left:0;right:0;margin:0 auto;background:rgba(16,24,39,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:12px 0;z-index:10;}
   .nav-item{background:none;border:none;color:var(--text3);font-family:inherit;font-size:9px;font-weight:700;letter-spacing:.15em;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px;cursor:pointer;}
   .nav-item.active{color:var(--accent2);}
   .nav-item .ic{font-size:20px;}
 
-  /* TOAST */
   .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--accent);color:#fff;padding:14px 24px;border-radius:12px;font-size:12px;letter-spacing:.1em;opacity:0;transition:.3s;pointer-events:none;z-index:100;box-shadow:0 8px 24px rgba(109,94,255,.3);}
   .toast.show{opacity:1;}
 
   .loading{text-align:center;padding:40px 0;color:var(--text3);font-size:11px;letter-spacing:.2em;}
 
-  /* Screen viewer modal */
-  .modal{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;}
   .modal.show{display:flex;}
   .modal img{max-width:100%;max-height:90vh;border-radius:12px;border:1px solid var(--accent);}
   .modal-close{position:absolute;top:20px;right:20px;background:var(--card);border:1px solid var(--border);color:#fff;padding:10px 16px;border-radius:10px;font-size:12px;letter-spacing:.1em;cursor:pointer;}
@@ -136,6 +126,7 @@
     <div class="ctrl" data-cmd="video" data-arg="10"><div class="icon">🎥</div><div class="label">VIDEO 10s</div></div>
     <div class="ctrl" data-cmd="audio" data-arg="15"><div class="icon">🎤</div><div class="label">AUDIO 15s</div></div>
     <div class="ctrl" data-cmd="screen"><div class="icon">📱</div><div class="label">SCREEN</div></div>
+    <div class="ctrl" data-cmd="live"><div class="icon">🔴</div><div class="label">LIVE SCREEN</div></div>
     <div class="ctrl" data-cmd="sms"><div class="icon">💬</div><div class="label">SMS</div></div>
     <div class="ctrl" data-cmd="notif"><div class="icon">🔔</div><div class="label">NOTIF</div></div>
     <div class="ctrl" data-cmd="contacts"><div class="icon">👤</div><div class="label">CONTACTS</div></div>
@@ -143,6 +134,8 @@
     <div class="ctrl" data-cmd="apps"><div class="icon">📦</div><div class="label">APPS</div></div>
     <div class="ctrl" data-cmd="files" data-arg="/sdcard"><div class="icon">📁</div><div class="label">FILES</div></div>
     <div class="ctrl" data-cmd="flash"><div class="icon">🔦</div><div class="label">FLASHLIGHT</div></div>
+    <div class="ctrl" data-cmd="flashspam"><div class="icon">⚡</div><div class="label">FLASH SPAM</div></div>
+    <div class="ctrl" data-cmd="flashspamoff"><div class="icon">⛔</div><div class="label">STOP SPAM</div></div>
     <div class="ctrl" data-cmd="toast" data-arg="Hello"><div class="icon">💭</div><div class="label">TOAST</div></div>
     <div class="ctrl danger" data-cmd="lock"><div class="icon">🔒</div><div class="label">LOCK</div></div>
     <div class="ctrl danger" data-cmd="wipe"><div class="icon">⚠️</div><div class="label">WIPE</div></div>
@@ -278,7 +271,6 @@ function startResultPoll(){
       const r = await fetch(SERVER+'/device?id='+encodeURIComponent(state.currentDevice));
       const j = await r.json();
 
-      // Render output
       if(j.ok && j.results && j.results.length){
         const box = $('outputBox');
         box.innerHTML = '';
@@ -295,7 +287,6 @@ function startResultPoll(){
         });
       }
 
-      // Render files
       if(j.ok && j.uploads && j.uploads.length){
         const fb = $('filesBox');
         fb.innerHTML = '';
