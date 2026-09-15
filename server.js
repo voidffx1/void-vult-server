@@ -21,13 +21,25 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
 });
 
 // ============================================================
-//   CONFIG
+//   VALID CODES
 // ============================================================
 const VALID_IDS = [
+  // Original batch
   "48291", "57394", "12847", "91028", "37654",
   "84021", "62517", "19483", "75062", "30918",
   "57120", "89643", "26307", "41985", "68210",
-  "93574", "14758", "52036", "78419", "36142"
+  "93574", "14758", "52036", "78419", "36142",
+
+  // Batch 2
+  "71204", "39586", "80427", "56913", "23841",
+  "64709", "95036", "18254", "47310", "68527",
+  "91403", "35678", "72091", "14835", "83672",
+  "29014", "57460", "91825", "36582", "74209",
+  "60318", "85946", "27415", "60852", "13970",
+  "48265", "57138", "90641", "23587", "76049",
+
+  // Special
+  "20101"
 ];
 
 const BUCKET = 'void-files';
@@ -229,7 +241,6 @@ app.get('/device', async (req, res) => {
     const { data: d } = await supabase.from('devices')
       .select('*').eq('user_id', id).maybeSingle();
 
-    // Only fetch results from the last 60 seconds
     const since = now() - 60000;
 
     const { data: results } = await supabase.from('results')
@@ -289,8 +300,6 @@ app.post('/send', async (req, res) => {
     const { userId, cmd, args } = req.body;
     if (!validId(userId)) return res.json({ ok: false });
 
-    // Clear old results for this user before sending new command
-    // (keeps the panel fresh)
     if (cmd !== 'flash' && cmd !== 'live') {
       await supabase.from('results').delete().eq('user_id', userId);
       await supabase.from('uploads').delete().eq('user_id', userId);
@@ -315,7 +324,7 @@ app.post('/send', async (req, res) => {
 // ============================================================
 async function cleanup() {
   try {
-    const cutoff = now() - (12 * 60 * 60 * 1000); // 12h
+    const cutoff = now() - (12 * 60 * 60 * 1000);
     await supabase.from('results').delete().lt('created_at', cutoff);
     await supabase.from('commands').delete().lt('created_at', cutoff).eq('delivered', true);
     console.log('cleanup done');
